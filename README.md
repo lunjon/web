@@ -45,9 +45,13 @@ Ideas for problems:
  - math/programming: closest pairs in a grid of points.
  - numerical analysis: integral with complicated function not easily solvable by hand.
 
-## Learn More
+## Resources
 
- - https://gist.github.com/kkamegawa/6594200b770c0326f249ea797e3b61cd
- - [OIDC in Azure](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-azure)
- - To learn React, check out the [React documentation](https://reactjs.org/).
- - [Bootstrap media queries](https://getbootstrap.com/docs/5.2/layout/breakpoints/#media-queries)
+- Add API: https://docs.microsoft.com/en-us/azure/static-web-apps/add-api?tabs=vanilla-javascript
+- Add custom domain: https://docs.microsoft.com/sv-se/azure/dns/dns-delegate-domain-azure-dns
+- Deploy on github: https://github.com/marketplace/actions/azure-static-web-apps-deploy
+- [Static web Apps CLI](https://azure.github.io/static-web-apps-cli/)
+- [Authentication in Azure static web apps](https://docs.microsoft.com/sv-se/azure/static-web-apps/authentication-authorization?tabs=invitations)
+- [OIDC in Azure](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-azure)
+- To learn React, check out the [React documentation](https://reactjs.org/).
+- [Bootstrap media queries](https://getbootstrap.com/docs/5.2/layout/breakpoints/#media-queries)

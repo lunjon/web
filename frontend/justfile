@@ -1,0 +1,9 @@
+start:
+    npm run start
+
+build:
+    npm run build
+
+# get token: az staticwebapp secrets list --name <application-name> --query "properties.apiKey"
+deploy: build
+    npx swa deploy ./build

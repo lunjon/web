@@ -1,5 +1,9 @@
+*.txt
+.env
+
 # Python
 *.pyc
 
 # Node/TS/JS
 node_modules/
+build/
