@@ -39,6 +39,7 @@ const Home = () => {
     { title: "Post 1", subtitle: "About something", text: "Massively interesting topic about stuff.", topic: "science" },
     { title: "Post 2", subtitle: "Programming is very cool", text: "???", topic: "programming" },
     { title: "Post 3", subtitle: "#3", text: "The sky is blue." },
+    { title: "Post 4", subtitle: "The fourth", text: "Star Wars?" },
   ];
 
   return (
