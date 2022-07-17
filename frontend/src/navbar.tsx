@@ -11,10 +11,10 @@ function NavBar() {
 
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
-          {/*<Nav.Link href="/posts">Blog Posts</Nav.Link>*/}
+          {/*<Nav.Link href="/somepath">Link</Nav.Link>*/}
           <NavDropdown title="Problem Solving" id="basic-nav-dropdown">
+            <NavDropdown.Item href="/problems/status">Status</NavDropdown.Item>
             <NavDropdown.Item href="/problems">List</NavDropdown.Item>
-            <NavDropdown.Item href="/problems/random">Random</NavDropdown.Item>
           </NavDropdown>
         </Nav>
       </Navbar.Collapse>

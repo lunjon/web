@@ -1,57 +1,45 @@
 import Media from "react-media";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import { createCardPost, PostSummary } from "../library";
+import { PostCard, arrangeGrid, arrangeList } from "../library";
 
-interface Props {
-  posts: PostSummary[];
+interface ProblemSummary {
+  id: number;
+  title: string;
+  description: string;
+  passed?: boolean;
 }
 
-const SmallScreen = (props: Props) => {
-  const rows = props.posts.map(post => {
-    return (<Row>
-      <Col>{createCardPost(post.title, post.subtitle, post.text)}</Col>
-    </Row>)
-  });
-
-  return (<Container>
-    {rows}
-  </Container>);
-};
-
-const BigScreen = (props: Props) => {
-  // TODO: limit number of cols per row
-  const cols = props.posts.map(post => {
-    return (<Col>
-      {createCardPost(post.title, post.subtitle, post.text, post.topic)}
-    </Col>)
-  });
-  return (<Container>
-    <Row>
-      {cols}
-    </Row>
-  </Container>);
-};
-
-export const ProblemList = () => { 
-  const posts: PostSummary[] = [
-    { title: "Problem 1", subtitle: "Integral", text: "Numerical solution to integral.", topic: "math" },
+export const ProblemList = () => {
+  const problems: ProblemSummary[] = [
+    { id: 1, title: "Function Approximation", description: "Numerical solution to equation.", passed: true },
+    { id: 2, title: "Numerical Integration", description: "Numerical solution to integral.", passed: true },
+    { id: 2, title: "NP-hard problem", description: "Hehe." },
   ];
+
+  const visible = [];
+  for (const p of problems) {
+    if (p.passed) {
+      visible.push(p);
+    } else {
+      visible.push(p);
+      break;
+    }
+  }
+
+  const posts: PostCard[] = problems.map(p => {
+    return {
+      title: `Problem ${p.id}`,
+      subtitle: p.title,
+      text: p.description,
+      topic: "math",
+      disabled: !p.passed,
+    };
+  });
 
   return (
     <Media queries={{
       small: '(max-width: 700px)',
     }}>
-      {(size) => size.small ? <SmallScreen posts={posts} /> : <BigScreen posts={posts} />}
+      {(size) => size.small ? arrangeList(posts) : arrangeGrid(posts, 4)}
     </Media >
-  )
-};
-
-export const Problem = () => {
-  return (
-    <p>
-      Text.
-    </p>
   )
 };
