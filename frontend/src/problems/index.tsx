@@ -12,7 +12,7 @@ export const ProblemList = () => {
   const problems: ProblemSummary[] = [
     { id: 1, title: "Function Approximation", description: "Numerical solution to equation.", passed: true },
     { id: 2, title: "Numerical Integration", description: "Numerical solution to integral.", passed: true },
-    { id: 2, title: "NP-hard problem", description: "Hehe." },
+    { id: 3, title: "TODO", description: "TODO" },
   ];
 
   const visible = [];
