@@ -2,6 +2,13 @@
 
 My personal website, hosted on [Azure Static web Apps](https://azure.microsoft.com/en-us/services/app-service/static/).
 
+## Requirements
+
+- Node.js 16
+- [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/)
+- [Azure Functions core tools](https://github.com/Azure/azure-functions-core-tools)
+- [Static Web Apps CLI](https://github.com/Azure/static-web-apps-cli)
+
 ## TODO
 
 - Add custom domain: https://docs.microsoft.com/sv-se/azure/dns/dns-delegate-domain-azure-dns
