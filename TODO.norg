@@ -1,6 +1,7 @@
 * Todo
 
+  - [ ] GH Workflow for deploying to preview environment for branches/PRs
+  - [ ] Deployment files for Cosmos DB (for API)
   - [ ] Add user state using React Context API
   - [ ] Add custom domain: https://docs.microsoft.com/sv-se/azure/dns/dns-delegate-domain-azure-dns
   - [ ] Add authentication: https://docs.microsoft.com/sv-se/azure/static-web-apps/authentication-authorization?tabs=invitations
-  - [ ] Add API: https://docs.microsoft.com/en-us/azure/static-web-apps/add-api?tabs=vanilla-javascript
