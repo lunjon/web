@@ -1,57 +1,64 @@
-import Media from "react-media";
-import { PostCard, arrangeGrid, arrangeList } from "../library";
+import { useEffect, useState } from "react";
+import { PostCard, arrangeGrid } from "../library";
 import { useParams } from "react-router-dom";
 
-interface ProblemSummary {
-  id: number;
+interface Model {
+  id: string;
+  index: number;
   title: string;
   description: string;
   passed?: boolean;
 }
 
 export const ProblemList = () => {
-  const problems: ProblemSummary[] = [
-    { id: 1, title: "Function Approximation", description: "Numerical solution to equation.", passed: true },
-    { id: 2, title: "Numerical Integration", description: "Numerical solution to integral.", passed: true },
-    { id: 3, title: "TODO", description: "TODO" },
-  ];
+  const [data, setData] = useState(<></>);
 
-  const visible = [];
-  for (const p of problems) {
-    if (p.passed) {
-      visible.push(p);
-    } else {
-      visible.push(p);
-      break;
-    }
-  }
+  useEffect(() => {
+    const get = async () => {
+      const res = await fetch("/api/problems");
+      const body: Model[] = await res.json();
 
-  const posts: PostCard[] = problems.map(p => {
-    return {
-      title: `Problem ${p.id}`,
-      subtitle: p.title,
-      text: p.description,
-      topic: "math",
-      link: p.passed ? `/problems/${p.id}` : undefined,
-      disabled: !p.passed,
+      const visible = [];
+      for (const p of body) {
+        visible.push(p);
+        if (!p.passed) {
+          break;
+        }
+      }
+
+      const posts: PostCard[] = visible.map(p => {
+        const enabled = p.index === 1 || p.passed;
+
+        return {
+          title: `Problem ${p.index}`,
+          subtitle: p.title,
+          text: p.description,
+          topic: "math",
+          link: enabled ? `/problems/${p.index}` : undefined,
+          disabled: !enabled,
+        };
+      });
+
+      const html = arrangeGrid(posts, 4);
+      setData(html);
     };
-  });
 
-  return (
-    <Media queries={{
-      small: '(max-width: 700px)',
-    }}>
-      {(size) => size.small ? arrangeList(posts) : arrangeGrid(posts, 4)}
-    </Media >
-  )
+    // Run the function
+    get();
+  }, []);
+
+
+  return data;
 };
 
 export const Problem = () => {
-  const { id } = useParams();
+  const { index } = useParams();
 
   return (
     <div>
-      <h1>Problem {id}</h1>
+      <h1>Problem {index}</h1>
     </div>
   )
 };
+
+export const ProblemStatus = () => (<h1>Status</h1>);
