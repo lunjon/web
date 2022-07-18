@@ -11,6 +11,7 @@ export interface PostCard {
   text: string;
   topic?: Topic;
   disabled?: boolean;
+  link?: string;
 }
 
 /**
@@ -43,6 +44,11 @@ export function createCard(post: PostCard) {
     variant = "Light";
   }
 
+  const title = post.link
+    ? <a className="link-light" href={post.link}>{post.title}</a>
+    : <>{post.title}</>;
+    
+
   return (<Card
     bg={variant.toLowerCase()}
     key={variant}
@@ -51,7 +57,7 @@ export function createCard(post: PostCard) {
     className="mb-2"
   >
     <Card.Header>
-      {post.disabled ? post.title : <strong>{post.title}</strong>}
+      {title}
     </Card.Header>
     <Card.Body>
       <Card.Title>{post.subtitle}</Card.Title>
