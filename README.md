@@ -9,12 +9,6 @@ My personal website, hosted on [Azure Static web Apps](https://azure.microsoft.c
 - [Azure Functions core tools](https://github.com/Azure/azure-functions-core-tools)
 - [Static Web Apps CLI](https://github.com/Azure/static-web-apps-cli)
 
-## TODO
-
-- Add custom domain: https://docs.microsoft.com/sv-se/azure/dns/dns-delegate-domain-azure-dns
-- Add authentication: https://docs.microsoft.com/sv-se/azure/static-web-apps/authentication-authorization?tabs=invitations
-- Add API: https://docs.microsoft.com/en-us/azure/static-web-apps/add-api?tabs=vanilla-javascript
-
 ## Problem Solving
 
 The idea is to provide a list of problems that can be solved by programming, math, numerical analysis, etc.
