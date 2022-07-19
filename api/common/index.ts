@@ -1,5 +1,5 @@
 export interface HttpResponse {
   status: number;
-  body: any;
+  body?: any;
   headers?: [string: string];
 }

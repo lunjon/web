@@ -3,14 +3,13 @@ import Stack from "react-bootstrap/Stack";
 import Container from "react-bootstrap/Container";
 import { chunks } from "./util";
 
-export type Topic = "default" | "programming" | "science" | "math";
+export type Variant = "Primary" | "Secondary" | "Success" | "Danger" | "Warning" | "Info" | "Light" | "Dark";
 
 export interface PostCard {
   title: string;
   subtitle: string;
   text: string;
-  topic?: Topic;
-  disabled?: boolean;
+  variant?: Variant;
   link?: string;
 }
 
@@ -19,40 +18,17 @@ export interface PostCard {
 * post (blog post, proglem post, etc.) in the site.
 */
 export function createCard(post: PostCard) {
-  let topic = post.topic;
-  if (!post.topic) {
-    topic = "default";
-  }
-
-  let variant: string;
-  switch (topic) {
-    case "math":
-      variant = "Success";
-      break;
-    case "programming":
-      variant = "Secondary";
-      break;
-    case "science":
-      variant = "Primary";
-      break;
-    default:
-      variant = "Light";
-  }
-
+  let variant = post.variant || "Primary";
   const text = variant.toLowerCase() === "light" ? "dark" : "white";
-  if (post.disabled) {
-    variant = "Light";
-  }
-
   const title = post.link
     ? <a className="link-light" href={post.link}>{post.title}</a>
     : <>{post.title}</>;
-    
+
 
   return (<Card
     bg={variant.toLowerCase()}
     key={variant}
-    text={post.disabled ? "muted" : text}
+    text={text}
     style={{ width: '18rem' }}
     className="mb-2"
   >

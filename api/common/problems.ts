@@ -1,6 +1,7 @@
 export interface Status {
   passed: boolean;
 }
+
 export interface Problem {
   id: string;
   index: number;
