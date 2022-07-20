@@ -2,8 +2,8 @@
 
   - [-] Add custom domain: https://docs.microsoft.com/sv-se/azure/dns/dns-delegate-domain-azure-dns
         Väntar på ändring av namnservrar
-  - [ ] GH Workflow for deploying to preview environment for branches/PRs
   - [ ] Deployment files for Cosmos DB (for API)
   - [ ] Add user state using React Context API
+  - [ ] GH Workflow for deploying to preview environment for branches/PRs
   - [ ] Add authentication: https://docs.microsoft.com/sv-se/azure/static-web-apps/authentication-authorization?tabs=invitations
   - [x] Implement page for displaying a problem by ID, i.e `/probems/:id`
