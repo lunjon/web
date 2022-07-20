@@ -1,5 +1,11 @@
+export interface Attempt {
+  value: any,
+  datetime: string;
+}
+
 export interface Status {
   passed: boolean;
+  attempts: Attempt[],
 }
 
 export interface Problem {
@@ -7,17 +13,12 @@ export interface Problem {
   status: Status;
 }
 
-export const problems: Problem[] = [
+export const results: Problem[] = [
   {
     index: 1,
     status: {
       passed: true,
+      attempts: [{ value: 1, datetime: "todo" }],
     }
-  },
-  {
-    index: 2,
-    status: {
-      passed: false,
-    }
-  },
+  }
 ];

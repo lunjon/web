@@ -1,6 +1,6 @@
 import "./problems.css";
 import { ReactNode } from "react";
-import { p1 } from "./library";
+import { p1 } from "./descriptions";
 
 interface ProblemInfo {
   index: number;
@@ -16,7 +16,7 @@ const library: ProblemInfo[] = [
   },
   {
     index: 2,
-    title: "Collatz Sequence",
+    title: "TODO",
     description: (<></>),
   },
 ];

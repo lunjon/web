@@ -3,10 +3,10 @@ import Card from "react-bootstrap/Card";
 import Stack from "react-bootstrap/Stack";
 import Container from "react-bootstrap/Container";
 import { chunks } from "../common";
-import {ProblemResponse} from "./model";
+import {StatusResponse} from "./model";
 import Library from "./library";
 
-function responseToCard(m: ProblemResponse) {
+function responseToCard(m: StatusResponse) {
   const passed = m.status.passed;
   const enabled = m.index === 1 || passed;
   let variant = enabled ? "Primary" : "Light";
@@ -61,10 +61,19 @@ function arrangeGrid(posts: ReactNode[], width: number) {
   </Container>);
 }
 
-async function fetchProblems(): Promise<ProblemResponse[]> {
+async function fetchProblems(): Promise<StatusResponse[]> {
   // TODO: handle errors
   const res = await fetch("/api/problems");
-  return await res.json();
+  const results: StatusResponse[] = await res.json();
+
+  // Append the next index which is not passed in order to render it.
+  let maxIndex = results.reduce((max, r) => r.index > max ? r.index : max, 0);
+  maxIndex += 1;
+
+  Library.getByIndex(maxIndex);
+  results.push({index: maxIndex, status: {passed: false, attempts: []}});
+
+  return results;
 }
 
 
@@ -74,9 +83,9 @@ export const ProblemList = () => {
   useEffect(() => {
     const get = async () => {
       // TODO: merge statuses with titles from library
-      const models = await fetchProblems();
-      const posts = models.map(responseToCard);
-      const html = arrangeGrid(posts, 4);
+      const statuses = await fetchProblems();
+      const cards = statuses.map(responseToCard);
+      const html = arrangeGrid(cards, 4);
       setData(html);
     };
 

@@ -1,11 +1,16 @@
 export interface Info {
-  id: string;
   index: number;
   title: string;
 }
 
+export interface Attempt {
+  value: any;
+  datetime: string;
+}
+
 export interface Status {
   passed: boolean;
+  attempts: Attempt[],
 }
 
 export interface Context {
@@ -13,7 +18,7 @@ export interface Context {
   status: Status;
 }
 
-export interface ProblemResponse extends Info {
+export interface StatusResponse {
   index: number;
   status: Status;
 }

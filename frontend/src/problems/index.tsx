@@ -2,20 +2,20 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Badge from "react-bootstrap/Badge";
 import Container from "react-bootstrap/Container";
-import {Context, ProblemResponse} from "./model";
+import {StatusResponse} from "./model";
 import { NotFound } from "../common";
 import Library from "./library";
 export { ProblemList } from "./list";
 
-async function fetchProblem(index: number | string) {
+async function fetchStatus(index: number | string) {
   // TODO: handle error
   const res = await fetch(`/api/problems/${index}`);
-  const status: ProblemResponse = await res.json();
-  return status;
+  const body: StatusResponse = await res.json();
+  return body;
 }
 
 interface Props {
-  context: Context;
+  res: StatusResponse
 }
 
 // The actual component containing displaying a problem.
@@ -23,12 +23,12 @@ interface Props {
 //  - check context for status
 //  - set badge in heading if passed: https://react-bootstrap.github.io/components/badge/
 const Page = (props: Props) => {
-  const problem = Library.getByIndex(props.context.info.index);
+  const problem = Library.getByIndex(props.res.index);
   if (!problem) {
     return <NotFound />;
   }
 
-  const badge = props.context.status.passed
+  const badge = props.res.status.passed
     ? <Badge bg="success">Passed</Badge>
     : <></>;
 
@@ -53,9 +53,8 @@ export const Problem = () => {
     const get = async () => {
 
       if (id) {
-        const problem = await fetchProblem(id);
-        const ctx = {info: problem, status: problem.status};
-        const elem = <Page context={ctx} />
+        const res = await fetchStatus(id);
+        const elem = <Page res={res} />
         setContent(elem);
       } else {
         setContent(<NotFound />);
