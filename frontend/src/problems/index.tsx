@@ -42,11 +42,10 @@ export const Problem = () => {
 
   useEffect(() => {
     const get = async () => {
-      const status = fetchProblemStatus(id);
 
       if (id) {
-        const n = parseInt(id);
-        const elem = <Page index={n} />
+        const status = await fetchProblemStatus(id);
+        const elem = <Page index={status.index} />
         setContent(elem);
       } else {
         setContent(<NotFound />);
