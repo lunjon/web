@@ -3,14 +3,31 @@ import { useParams } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Model from "./model";
 import { NotFound } from "../common";
+import Library from "./library";
 export { ProblemList } from "./list";
 
-async function fetchProblem(index: number | string) {
+async function fetchProblemStatus(index: number | string) {
   // TODO: handle error
   const res = await fetch(`/api/problems/${index}`);
   const model: Model = await res.json();
   return model;
 }
+
+interface Props {
+  index: number;
+}
+
+const Page = (props: Props) => {
+  const info = Library.get(props.index);
+  if (!info) {
+    return <NotFound />;
+  }
+
+  return (<Container>
+    <h1>Problem {info.index}</h1>
+    {info.description}
+  </Container>);
+};
 
 /**
 * Component for displaying a problem by its index, e.g problem 9.
@@ -25,15 +42,11 @@ export const Problem = () => {
 
   useEffect(() => {
     const get = async () => {
+      const status = fetchProblemStatus(id);
+
       if (id) {
-        const model = await fetchProblem(id);
-
-        const elem = (<Container>
-          <h1>Problem {model.index}</h1>
-
-          <p>{model.description}</p>
-        </Container>);
-
+        const n = parseInt(id);
+        const elem = <Page index={n} />
         setContent(elem);
       } else {
         setContent(<NotFound />);
@@ -43,11 +56,7 @@ export const Problem = () => {
     get();
   }, [id]);
 
-  return (
-    <div>
-      {content}
-    </div>
-  )
+  return content;
 };
 
 export const ProblemStatus = () => (<h1>Status</h1>);

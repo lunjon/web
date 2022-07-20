@@ -70,6 +70,7 @@ export const ProblemList = () => {
 
   useEffect(() => {
     const get = async () => {
+      // TODO: merge statuses with titles from library
       const models = await fetchProblems();
       const posts = models.map(modelToCard);
       const html = arrangeGrid(posts, 4);
