@@ -1,5 +1,6 @@
+import "./problems.css";
 import { ReactNode } from "react";
-import Container from "react-bootstrap/Container";
+import { p1 } from "./library";
 
 interface ProblemInfo {
   index: number;
@@ -11,10 +12,7 @@ const library: ProblemInfo[] = [
   {
     index: 1,
     title: "Collatz Sequence",
-    description: (<Container>
-      <p>A <a rel="noreferrer" href="https://en.wikipedia.org/wiki/Collatz_conjecture" target="_blank">Collatz sequence</a> is the sequence of numbers yielded when calculating the function. Starting with the number 3456, what is the sum of the numbers in the sequence (including the starting value)?
-      </p>
-    </Container>),
+    description: p1,
   },
   {
     index: 2,
@@ -24,8 +22,12 @@ const library: ProblemInfo[] = [
 ];
 
 const Library = {
-  get(index: number) {
-    return library.find(info => info.index === index);
+  getByIndex(index: number) {
+    const p = library.find(info => info.index === index);
+    if (!p) {
+      throw new Error(`Unknown problem index: ${index}`);
+    }
+    return p;
   }
 };
 

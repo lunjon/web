@@ -1,9 +1,19 @@
-interface Model {
+export interface Info {
   id: string;
   index: number;
   title: string;
-  description: string;
-  passed?: boolean;
 }
 
-export default Model;
+export interface Status {
+  passed: boolean;
+}
+
+export interface Context {
+  info: Info;
+  status: Status;
+}
+
+export interface ProblemResponse extends Info {
+  index: number;
+  status: Status;
+}

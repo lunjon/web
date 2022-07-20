@@ -2,10 +2,12 @@ import { AzureFunction, Context, HttpRequest } from "@azure/functions"
 import { HttpResponse } from "../common";
 import { problems } from "../common/problems";
 
+const notFound = { status: 404 };
+
 const httpTrigger: AzureFunction = async function(context: Context, req: HttpRequest): Promise<HttpResponse> {
   const index = req.params["index"];
   if (!index) {
-    return { status: 404 };
+    return notFound;
   }
 
   try {
@@ -13,17 +15,16 @@ const httpTrigger: AzureFunction = async function(context: Context, req: HttpReq
     context.log(`Trying to fetch problem with index ${n}`);
 
     const p = problems.find(p => p.index === n);
-    if (p) {
-      context.log("Found!");
-      return {
-        status: 200,
-        body: p,
-      };
+    if (!p) {
+      return notFound;
     }
 
-    return { status: 404 };
+    return {
+      status: 200,
+      body: p,
+    };
   } catch (_) {
-    return { status: 404 };
+    return notFound;
   }
 };
 

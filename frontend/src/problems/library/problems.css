@@ -1,0 +1,17 @@
+.description {
+  text-align: left;
+  width: 60%;
+  margin: auto;
+  padding: 20px;
+}
+
+
+a {
+  color: #427bf5;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  font-weight: bold;
+}

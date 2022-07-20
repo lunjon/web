@@ -3,26 +3,29 @@ import Card from "react-bootstrap/Card";
 import Stack from "react-bootstrap/Stack";
 import Container from "react-bootstrap/Container";
 import { chunks } from "../common";
-import Model from "./model";
+import {ProblemResponse} from "./model";
+import Library from "./library";
 
-function modelToCard(m: Model) {
-  const enabled = m.index === 1 || m.passed;
+function responseToCard(m: ProblemResponse) {
+  const passed = m.status.passed;
+  const enabled = m.index === 1 || passed;
   let variant = enabled ? "Primary" : "Light";
-  if (m.passed) {
+  if (passed) {
     variant = "Success";
   }
 
+  const info = Library.getByIndex(m.index);
 
-  const text = enabled ? "light" : "dark";
+  const header = `Problem ${m.index}`;
   const title = enabled
-    ? <a className="link-light" href={"/problems/"+m.index.toString()}>{m.title}</a>
-    : <>{m.title}</>;
+    ? <a className="link-light" href={"/problems/"+m.index.toString()}>{header}</a>
+    : <>{header}</>;
 
 
   return (<Card
     bg={variant.toLowerCase()}
     key={variant}
-    text={text}
+    text={enabled ? "light" : "dark"}
     style={{ width: '18rem' }}
     className="mb-2"
   >
@@ -30,7 +33,7 @@ function modelToCard(m: Model) {
       {title}
     </Card.Header>
     <Card.Body>
-      <Card.Title>{m.title}</Card.Title>
+      <Card.Title>{info.title}</Card.Title>
     </Card.Body>
   </Card>);
 }
@@ -58,10 +61,10 @@ function arrangeGrid(posts: ReactNode[], width: number) {
   </Container>);
 }
 
-async function fetchProblems(): Promise<Model[]> {
+async function fetchProblems(): Promise<ProblemResponse[]> {
+  // TODO: handle errors
   const res = await fetch("/api/problems");
-  const body: Model[] = await res.json();
-  return body;
+  return await res.json();
 }
 
 
@@ -72,7 +75,7 @@ export const ProblemList = () => {
     const get = async () => {
       // TODO: merge statuses with titles from library
       const models = await fetchProblems();
-      const posts = models.map(modelToCard);
+      const posts = models.map(responseToCard);
       const html = arrangeGrid(posts, 4);
       setData(html);
     };

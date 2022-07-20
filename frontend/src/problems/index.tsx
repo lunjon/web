@@ -1,31 +1,42 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Badge from "react-bootstrap/Badge";
 import Container from "react-bootstrap/Container";
-import Model from "./model";
+import {Context, ProblemResponse} from "./model";
 import { NotFound } from "../common";
 import Library from "./library";
 export { ProblemList } from "./list";
 
-async function fetchProblemStatus(index: number | string) {
+async function fetchProblem(index: number | string) {
   // TODO: handle error
   const res = await fetch(`/api/problems/${index}`);
-  const model: Model = await res.json();
-  return model;
+  const status: ProblemResponse = await res.json();
+  return status;
 }
 
 interface Props {
-  index: number;
+  context: Context;
 }
 
+// The actual component containing displaying a problem.
+// TODO:
+//  - check context for status
+//  - set badge in heading if passed: https://react-bootstrap.github.io/components/badge/
 const Page = (props: Props) => {
-  const info = Library.get(props.index);
-  if (!info) {
+  const problem = Library.getByIndex(props.context.info.index);
+  if (!problem) {
     return <NotFound />;
   }
 
+  const badge = props.context.status.passed
+    ? <Badge bg="success">Passed</Badge>
+    : <></>;
+
+  const header = <h1>Problem {problem.index} - {problem.title} {badge}</h1>;
+
   return (<Container>
-    <h1>Problem {info.index}</h1>
-    {info.description}
+    {header}
+    {problem.description}
   </Container>);
 };
 
@@ -35,8 +46,6 @@ const Page = (props: Props) => {
 export const Problem = () => {
   // TODO:
   //  - set spinner in initial state: https://react-bootstrap.github.io/components/spinners/
-  //  - set badge in heading if passed: https://react-bootstrap.github.io/components/badge/
-
   const [content, setContent] = useState(<></>);
   const { id } = useParams();
 
@@ -44,8 +53,9 @@ export const Problem = () => {
     const get = async () => {
 
       if (id) {
-        const status = await fetchProblemStatus(id);
-        const elem = <Page index={status.index} />
+        const problem = await fetchProblem(id);
+        const ctx = {info: problem, status: problem.status};
+        const elem = <Page context={ctx} />
         setContent(elem);
       } else {
         setContent(<NotFound />);
@@ -58,4 +68,4 @@ export const Problem = () => {
   return content;
 };
 
-export const ProblemStatus = () => (<h1>Status</h1>);
+export const ProblemStats = () => (<h1>Stats</h1>);

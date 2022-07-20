@@ -1,7 +1,7 @@
-import './App.css';
+import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Home from "./home";
-import { Problem, ProblemList, ProblemStatus } from "./problems";
+import { Problem, ProblemList, ProblemStats } from "./problems";
 import NavBar from "./navbar";
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/problems" element={<ProblemList />} />
-        <Route path="/problems/status" element={<ProblemStatus />} />
+        <Route path="/problems/stats" element={<ProblemStats />} />
         <Route path="/problems/:id" element={<Problem />} />
       </Routes>
     </div>
