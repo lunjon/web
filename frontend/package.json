@@ -46,6 +46,10 @@
     ]
   },
   "devDependencies": {
-    "@azure/static-web-apps-cli": "^1.0.2"
+    "@azure/static-web-apps-cli": "^1.0.2",
+    "@typescript-eslint/eslint-plugin": "^5.30.7",
+    "@typescript-eslint/parser": "^5.30.7",
+    "eslint": "^8.20.0",
+    "eslint-plugin-react": "^7.30.1"
   }
 }

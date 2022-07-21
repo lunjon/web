@@ -1,5 +1,6 @@
 * Todo
 
+  - [ ] Add eslint to api
   - [-] Add custom domain: https://docs.microsoft.com/sv-se/azure/dns/dns-delegate-domain-azure-dns
         Väntar på ändring av namnservrar
   - [ ] Deployment files for Cosmos DB (for API)

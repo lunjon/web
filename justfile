@@ -2,6 +2,9 @@ build:
     cd frontend && npm run build
     cd api && npm run build
 
+lint:
+    cd frontend && npx eslint src
+
 start-frontend:
     cd frontend && npm start
 start-api:
