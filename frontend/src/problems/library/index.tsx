@@ -1,6 +1,6 @@
 import "./problems.css";
 import { ReactNode } from "react";
-import { p1 } from "./descriptions";
+import * as Descriptions from "./descriptions";
 
 interface ProblemInfo {
   index: number;
@@ -12,23 +12,31 @@ const library: ProblemInfo[] = [
   {
     index: 1,
     title: "Collatz Sequence",
-    description: p1,
+    description: Descriptions.p1,
   },
   {
     index: 2,
-    title: "TODO",
-    description: (<></>),
+    title: "Letter frequency",
+    description: Descriptions.p2,
+  },
+  {
+    index: 3,
+    title: "Letter frequency",
+    description: Descriptions.p3,
   },
 ];
 
 const Library = {
+  tryByIndex(index: number) {
+    return library.find(info => info.index === index);
+  },
   getByIndex(index: number) {
     const p = library.find(info => info.index === index);
     if (!p) {
       throw new Error(`Unknown problem index: ${index}`);
     }
     return p;
-  }
+  },
 };
 
 export default Library;

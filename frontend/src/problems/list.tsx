@@ -76,10 +76,21 @@ function appendNextAvailableProblem(infos: Info[]) {
   }
 
   // Append the next index which is not passed in order to render it.
-  const maxIndex = 1 + infos.reduce((max, r) => r.index > max ? r.index : max, 0);
+  const nextIndex = 1 + infos.reduce((max, r) => r.index > max ? r.index : max, 0);
+  const previous = infos.find(info => info.index === nextIndex - 1);
+  const enabled = previous ? previous.passed : false;
 
-  const p = Library.getByIndex(maxIndex);
-  infos.push({ index: maxIndex, title: p.title, passed: false, enabled: false });
+  // Add to list
+  const next = Library.getByIndex(nextIndex);
+  infos.push({ index: nextIndex, title: next.title, passed: false, enabled: enabled });
+
+  // Was it enabled? Then add the next to the list as well.
+  if (enabled) {
+    const afterNext = Library.tryByIndex(nextIndex+1);
+    if (afterNext) {
+      infos.push({ index: afterNext.index, title: afterNext.title, passed: false, enabled: false });
+    }
+  }
   return infos;
 }
 
