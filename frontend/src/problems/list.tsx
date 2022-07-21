@@ -4,6 +4,7 @@ import Stack from "react-bootstrap/Stack";
 import Container from "react-bootstrap/Container";
 import { chunks } from "../common";
 import { StatusResponse } from "./model";
+import {nanoid} from "nanoid";
 import Library from "./library";
 
 function toCard(info: Info) {
@@ -21,7 +22,7 @@ function toCard(info: Info) {
 
   return (<Card
     bg={variant.toLowerCase()}
-    key={variant}
+    key={nanoid()}
     text={info.enabled ? "light" : "dark"}
     style={{ width: '18rem' }}
     className="mb-2"
@@ -50,7 +51,7 @@ function toCard(info: Info) {
 function arrangeGrid(posts: ReactNode[], width: number) {
   const chs = chunks(posts, width);
   const stacks = chs.map(row => {
-    return (<Stack direction="horizontal" gap={2}>{row}</Stack>);
+    return (<Stack key={nanoid()} direction="horizontal" gap={2}>{row}</Stack>);
   })
 
   return (<Container>
@@ -63,35 +64,6 @@ async function fetchStatuses(): Promise<StatusResponse[]> {
   const res = await fetch("/api/problems");
   const results: StatusResponse[] = await res.json();
   return results;
-}
-
-function appendNextAvailableProblem(infos: Info[]) {
-  if (infos.length === 0) {
-    // User hasn't solved any problems
-    const one = Library.getByIndex(1);
-    const two = Library.getByIndex(2);
-    infos.push({ index: one.index, title: one.title, passed: false, enabled: true });
-    infos.push({ index: two.index, title: two.title, passed: false, enabled: false });
-    return infos;
-  }
-
-  // Append the next index which is not passed in order to render it.
-  const nextIndex = 1 + infos.reduce((max, r) => r.index > max ? r.index : max, 0);
-  const previous = infos.find(info => info.index === nextIndex - 1);
-  const enabled = previous ? previous.passed : false;
-
-  // Add to list
-  const next = Library.getByIndex(nextIndex);
-  infos.push({ index: nextIndex, title: next.title, passed: false, enabled: enabled });
-
-  // Was it enabled? Then add the next to the list as well.
-  if (enabled) {
-    const afterNext = Library.tryByIndex(nextIndex+1);
-    if (afterNext) {
-      infos.push({ index: afterNext.index, title: afterNext.title, passed: false, enabled: false });
-    }
-  }
-  return infos;
 }
 
 interface Info {
@@ -121,7 +93,6 @@ export const ProblemList = () => {
       const statuses = await fetchStatuses();
 
       const infos = statuses.map(toInfo);
-      appendNextAvailableProblem(infos);
 
       const cards = infos.map(toCard);
       const html = arrangeGrid(cards, 4);
