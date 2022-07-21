@@ -5,7 +5,7 @@ type State = {
 type ActionType = "login" | "logout";
 
 type Action = {
-  data: any;
+  // data: any;
   type: ActionType;
 }
 

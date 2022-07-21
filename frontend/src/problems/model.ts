@@ -4,7 +4,7 @@ export interface Info {
 }
 
 export interface Attempt {
-  value: any;
+  value: string | number;
   datetime: string;
 }
 
