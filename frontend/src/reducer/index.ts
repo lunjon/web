@@ -1,4 +1,5 @@
 type State = {
+  user: string;
 }
 
 type ActionType = "login" | "logout";

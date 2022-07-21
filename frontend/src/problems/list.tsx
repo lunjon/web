@@ -1,3 +1,4 @@
+import React from "react";
 import { ReactNode, useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Stack from "react-bootstrap/Stack";
@@ -80,7 +81,7 @@ function toInfo(res: StatusResponse): Info {
     passed: res.status.passed,
     enabled: true,
   }
-};
+}
 
 /**
 * Displays a list of problems.
