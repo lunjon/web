@@ -1,7 +1,7 @@
 import Container from "react-bootstrap/Container";
 
 const niceLink = (ref: string, text: string) => (
-  <a rel="noreferrer" href={ref} target="_blank">{text} </a>);
+  <a rel="noreferrer" href={ref} target="_blank">{text}</a>);
 
 export const p1 = (<Container className="description">
   <p>
