@@ -3,6 +3,7 @@
   - [-] Add custom domain: https://docs.microsoft.com/sv-se/azure/dns/dns-delegate-domain-azure-dns
         Väntar på ändring av namnservrar
   - [ ] Deployment files for Cosmos DB (for API)
+  - [ ] Application insights instance
   - [ ] Add user state using React Context API
   - [ ] Add authentication: https://docs.microsoft.com/sv-se/azure/static-web-apps/authentication-authorization?tabs=invitations
   - [x] Implement page for displaying a problem by ID, i.e `/probems/:id`
