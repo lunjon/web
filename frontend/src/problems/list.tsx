@@ -3,29 +3,26 @@ import Card from "react-bootstrap/Card";
 import Stack from "react-bootstrap/Stack";
 import Container from "react-bootstrap/Container";
 import { chunks } from "../common";
-import {StatusResponse} from "./model";
+import { StatusResponse } from "./model";
 import Library from "./library";
 
-function responseToCard(m: StatusResponse) {
-  const passed = m.status.passed;
-  const enabled = m.index === 1 || passed;
-  let variant = enabled ? "Primary" : "Light";
+function toCard(info: Info) {
+  const passed = info.passed;
+  let variant = info.enabled ? "Primary" : "Light";
   if (passed) {
     variant = "Success";
   }
 
-  const info = Library.getByIndex(m.index);
-
-  const header = `Problem ${m.index}`;
-  const title = enabled
-    ? <a className="link-light" href={"/problems/"+m.index.toString()}>{header}</a>
+  const header = `Problem ${info.index}`;
+  const title = info.enabled
+    ? <a className="link-light" href={"/problems/" + info.index.toString()}>{header}</a>
     : <>{header}</>;
 
 
   return (<Card
     bg={variant.toLowerCase()}
     key={variant}
-    text={enabled ? "light" : "dark"}
+    text={info.enabled ? "light" : "dark"}
     style={{ width: '18rem' }}
     className="mb-2"
   >
@@ -61,30 +58,58 @@ function arrangeGrid(posts: ReactNode[], width: number) {
   </Container>);
 }
 
-async function fetchProblems(): Promise<StatusResponse[]> {
+async function fetchStatuses(): Promise<StatusResponse[]> {
   // TODO: handle errors
   const res = await fetch("/api/problems");
   const results: StatusResponse[] = await res.json();
-
-  // Append the next index which is not passed in order to render it.
-  let maxIndex = results.reduce((max, r) => r.index > max ? r.index : max, 0);
-  maxIndex += 1;
-
-  Library.getByIndex(maxIndex);
-  results.push({index: maxIndex, status: {passed: false, attempts: []}});
-
   return results;
 }
 
+function appendNextAvailableProblem(infos: Info[]) {
+  if (infos.length === 0) {
+    const info = Library.getByIndex(1);
+    infos.push({ index: info.index, title: info.title, passed: false, enabled: true });
+    return infos;
+  }
 
+  // Append the next index which is not passed in order to render it.
+  const maxIndex = 1 + infos.reduce((max, r) => r.index > max ? r.index : max, 0);
+
+  const p = Library.getByIndex(maxIndex);
+  infos.push({ index: maxIndex, title: p.title, passed: false, enabled: false });
+  return infos;
+}
+
+interface Info {
+  index: number;
+  title: string;
+  passed: boolean;
+  enabled: boolean;
+}
+
+function toInfo(res: StatusResponse): Info {
+  return {
+    index: res.index,
+    title: Library.getByIndex(res.index).title,
+    passed: res.status.passed,
+    enabled: true,
+  }
+};
+
+/**
+* Displays a list of problems.
+*/
 export const ProblemList = () => {
   const [data, setData] = useState(<></>);
 
   useEffect(() => {
     const get = async () => {
-      // TODO: merge statuses with titles from library
-      const statuses = await fetchProblems();
-      const cards = statuses.map(responseToCard);
+      const statuses = await fetchStatuses();
+
+      const infos = statuses.map(toInfo);
+      appendNextAvailableProblem(infos);
+
+      const cards = infos.map(toCard);
       const html = arrangeGrid(cards, 4);
       setData(html);
     };
