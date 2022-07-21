@@ -1,7 +1,7 @@
 import Container from "react-bootstrap/Container";
 
 const niceLink = (ref: string, text: string) => (
-  <a rel="noreferrer" href={ref }target="_blank">{text} </a>); 
+  <a rel="noreferrer" href={ref} target="_blank">{text} </a>);
 
 export const p1 = (<Container className="description">
   <p>
@@ -24,8 +24,14 @@ export const p2 = (<Container className="description">
 
 export const p3 = (<Container className="description">
   <p>
+    <em>Blah blah flavor text</em>: <br />
+
+    <img src="/figures/p3-eq.png" alt="Equation" />
   </p>
 
-  <p>What is the sum of all the letters frequencies in the text?</p>
+  <p>Finding a root for the function by hand proves to be very hard.<br />
+    An alternative is to use numerical analysis with e.g. the {niceLink("https://en.wikipedia.org/wiki/Bisection_method", "Bisection method")}.
+    A value of at least 4 decimals is required for the calculations to be correct. What is the root value?
+  </p>
 </Container>);
 

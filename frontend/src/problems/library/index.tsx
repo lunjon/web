@@ -1,4 +1,4 @@
-import "./problems.css";
+import "./style.css";
 import { ReactNode } from "react";
 import * as Descriptions from "./descriptions";
 
@@ -21,7 +21,7 @@ const library: ProblemInfo[] = [
   },
   {
     index: 3,
-    title: "Letter frequency",
+    title: "Numerical analysis 1",
     description: Descriptions.p3,
   },
 ];

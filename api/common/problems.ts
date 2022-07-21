@@ -22,4 +22,18 @@ export const results: Problem[] = [
       attempts: [],
     }
   },
+  {
+    index: 2,
+    status: {
+      passed: true,
+      attempts: [],
+    }
+  },
+  {
+    index: 3,
+    status: {
+      passed: false,
+      attempts: [],
+    }
+  },
 ];
