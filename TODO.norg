@@ -1,5 +1,7 @@
 * Todo
 
+  - [ ] Add build step to workflow
+  - [ ] Add lint step to workflow
   - [ ] Add eslint to api
   - [-] Add custom domain: https://docs.microsoft.com/sv-se/azure/dns/dns-delegate-domain-azure-dns
         Väntar på ändring av namnservrar
