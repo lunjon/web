@@ -5,7 +5,7 @@
       "type": "httpTrigger",
       "direction": "in",
       "name": "req",
-      "route": "problems/{index}",
+      "route": "problems/{index}/status",
       "methods": [
         "get"
       ]

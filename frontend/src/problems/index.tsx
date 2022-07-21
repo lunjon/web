@@ -9,7 +9,7 @@ export { ProblemList } from "./list";
 
 async function fetchStatus(index: number | string) {
   // TODO: handle error
-  const res = await fetch(`/api/problems/${index}`);
+  const res = await fetch(`/api/problems/${index}/status`);
   const body: StatusResponse = await res.json();
   return body;
 }

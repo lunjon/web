@@ -67,8 +67,11 @@ async function fetchStatuses(): Promise<StatusResponse[]> {
 
 function appendNextAvailableProblem(infos: Info[]) {
   if (infos.length === 0) {
-    const info = Library.getByIndex(1);
-    infos.push({ index: info.index, title: info.title, passed: false, enabled: true });
+    // User hasn't solved any problems
+    const one = Library.getByIndex(1);
+    const two = Library.getByIndex(2);
+    infos.push({ index: one.index, title: one.title, passed: false, enabled: true });
+    infos.push({ index: two.index, title: two.title, passed: false, enabled: false });
     return infos;
   }
 
