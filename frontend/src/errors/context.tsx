@@ -4,7 +4,7 @@ import Alert from 'react-bootstrap/Alert';
 type Callback = () => void;
 
 type ErrorCallback = (message: string, error: Error) => void;
-const defaultErrorCallback = (message: string, error: Error) => { };
+const defaultErrorCallback = (_message: string, _error: Error) => { };
 
 const ErrorHandlerContext = React.createContext(defaultErrorCallback);
 
