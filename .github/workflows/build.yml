@@ -1,4 +1,4 @@
-name: Build
+name: Build & lint
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   build-api:
-    name: Build API
+    name: API
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -17,11 +17,28 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-
       - name: Install dependencies
         run: npm ci
-
       - name: Build
         run: |
           npm run build
           npx eslint common func-*
+
+  build-frontend:
+    name: Frontend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: |
+          npm run build
+          npx eslint src
