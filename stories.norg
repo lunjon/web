@@ -8,8 +8,8 @@
   -- [ ] Add user state using React Context API
 
 * CI/CD
-  - [ ] Add build step to workflow
-  - [ ] Add lint step to workflow
+  - [x] Add build step to workflow
+  - [x] Add lint step to workflow
   - [x] Add eslint to api
 
 * Deployment
