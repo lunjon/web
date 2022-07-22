@@ -9,6 +9,10 @@
   - [ ] Add authentication: https://docs.microsoft.com/sv-se/azure/static-web-apps/authentication-authorization?tabs=invitations
   -- [ ] Add user state using React Context API
 
+* Test
+  - [ ] Add tests for api
+  - [ ] Add tests for frontend
+
 * CI/CD
   - [x] Add build step to workflow
   - [x] Add lint step to workflow
