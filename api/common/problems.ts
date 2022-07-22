@@ -1,5 +1,5 @@
 export interface Attempt {
-  value: any,
+  value: string | number,
   correct: boolean;
   datetime: string;
 }

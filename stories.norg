@@ -10,7 +10,7 @@
 * CI/CD
   - [ ] Add build step to workflow
   - [ ] Add lint step to workflow
-  - [ ] Add eslint to api
+  - [x] Add eslint to api
 
 * Deployment
   - [-] Add custom domain: https://docs.microsoft.com/sv-se/azure/dns/dns-delegate-domain-azure-dns

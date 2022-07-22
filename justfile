@@ -4,6 +4,7 @@ build:
 
 lint:
     cd frontend && npx eslint src
+    cd api && npx eslint common func-*
 
 start-frontend:
     cd frontend && npm start
