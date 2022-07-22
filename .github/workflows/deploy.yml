@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - api/**
-      - frontend/**
+      - 'api/**'
+      - 'frontend/**'
 
 # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
 
