@@ -18,13 +18,13 @@ jobs:
           node-version: 16
 
       - name: Build frontend
-        runs: |
+        run: |
           cd frontend
           npm run build
           npx eslint src
 
       - name: Build API
-        runs: |
+        run: |
           cd api
           npm run build
           npx eslint common func-*
