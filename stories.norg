@@ -1,5 +1,6 @@
 * Features
-  - [ ] Error handling (see section 4.1 in react cookbook)
+  - [x] Error handling (see section 4.1 in react cookbook)
+  - [?] Use markdown for problem descriptions. Could be fetched from backend.
   - [ ] Post problem results
   -- [ ] Implement API endpoint
   -- [ ] Add Cosmos DB to deployment
