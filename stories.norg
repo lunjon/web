@@ -1,0 +1,17 @@
+* Features
+  - [ ] Post problem results
+  -- [ ] Implement API endpoint
+  -- [ ] Add Cosmos DB to deployment
+  -- [ ] Add form for posting a result
+  -- [ ] Display status/result in problem page
+  - [ ] Add authentication: https://docs.microsoft.com/sv-se/azure/static-web-apps/authentication-authorization?tabs=invitations
+  -- [ ] Add user state using React Context API
+
+* CI/CD
+  - [ ] Add build step to workflow
+  - [ ] Add lint step to workflow
+  - [ ] Add eslint to api
+
+* Deployment
+  - [-] Add custom domain: https://docs.microsoft.com/sv-se/azure/dns/dns-delegate-domain-azure-dns
+  - [ ] Application insights instance
