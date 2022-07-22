@@ -19,14 +19,14 @@ jobs:
 
       - name: Build API
         working-directory: api
-        run:
+        run: |
           npm ci
           npm run build
           npx eslint common func-*
 
       - name: Build frontend
         working-directory: frontend
-        run:
+        run: |
           npm ci
           npm run build
           npx eslint src
@@ -38,5 +38,5 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: upload
           app_location: "./frontend"
-          output_location: "build"
+          output_location: build
           api_location: "./api"
