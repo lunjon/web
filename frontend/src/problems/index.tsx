@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import Badge from "react-bootstrap/Badge";
 import Container from "react-bootstrap/Container";
 import {StatusResponse} from "./model";
-import { NotFound } from "../common";
+import { NotFound } from "../errors";
 import Library from "./library";
 export { ProblemList } from "./list";
 

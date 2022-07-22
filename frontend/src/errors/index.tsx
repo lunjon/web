@@ -1,7 +1,8 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
+export { useErrorHandler } from "./context";
 
-export const NotFound = () => { 
+export const NotFound = () => {
   // TODO: format nicely.
   return (<Container>
     <h1>404 - Page not found</h1>
